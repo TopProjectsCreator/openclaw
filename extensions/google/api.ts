@@ -41,6 +41,7 @@ export {
   shouldNormalizeGoogleGenerativeAiProviderConfig,
   shouldNormalizeGoogleProviderConfig,
 } from "./provider-policy.js";
+export { buildGoogleAntigravityProvider } from "./antigravity-provider.js";
 export { buildGoogleGeminiCliProvider } from "./gemini-cli-provider.js";
 export { buildGoogleProvider } from "./provider-registration.js";
 

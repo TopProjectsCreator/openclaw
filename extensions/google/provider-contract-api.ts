@@ -8,7 +8,7 @@ export function createGoogleProvider(): ProviderPlugin {
     id: "google",
     label: "Google AI Studio",
     docsPath: "/providers/models",
-    hookAliases: ["google-antigravity", "google-vertex"],
+    hookAliases: ["google-vertex"],
     envVars: ["GEMINI_API_KEY", "GOOGLE_API_KEY"],
     auth: [
       {
@@ -42,6 +42,38 @@ export function createGoogleVertexProvider(): ProviderPlugin {
       "GOOGLE_APPLICATION_CREDENTIALS",
     ],
     auth: [],
+  };
+}
+
+export function createGoogleAntigravityProvider(): ProviderPlugin {
+  return {
+    id: "google-antigravity",
+    label: "Antigravity CLI OAuth",
+    docsPath: "/providers/models",
+    aliases: ["antigravity"],
+    envVars: [
+      "OPENCLAW_GEMINI_OAUTH_CLIENT_ID",
+      "OPENCLAW_GEMINI_OAUTH_CLIENT_SECRET",
+      "GEMINI_CLI_OAUTH_CLIENT_ID",
+      "GEMINI_CLI_OAUTH_CLIENT_SECRET",
+    ],
+    auth: [
+      {
+        id: "oauth",
+        kind: "oauth",
+        label: "Antigravity CLI OAuth",
+        hint: "PKCE + localhost callback (reuses Gemini CLI credentials)",
+        run: noopAuth,
+      },
+    ],
+    wizard: {
+      setup: {
+        choiceId: "google-antigravity",
+        choiceLabel: "Antigravity CLI OAuth",
+        choiceHint: "Google OAuth via Antigravity bridge (reuses Gemini CLI credentials)",
+        methodId: "oauth",
+      },
+    },
   };
 }
 

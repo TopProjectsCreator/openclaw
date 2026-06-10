@@ -15,6 +15,7 @@ import {
 import { createCapturedThinkingConfigStream } from "openclaw/plugin-sdk/provider-test-contracts";
 import type { RealtimeVoiceProviderPlugin } from "openclaw/plugin-sdk/realtime-voice";
 import { describe, expect, it, vi } from "vitest";
+import { registerGoogleAntigravityProvider } from "./antigravity-provider.js";
 import { registerGoogleGeminiCliProvider } from "./gemini-cli-provider.js";
 import googlePlugin from "./index.js";
 import googleProviderDiscovery from "./provider-discovery.js";
@@ -22,6 +23,7 @@ import { registerGoogleProvider } from "./provider-registration.js";
 
 const googleProviderPlugin = {
   register(api: Parameters<typeof registerGoogleProvider>[0]) {
+    registerGoogleAntigravityProvider(api);
     registerGoogleProvider(api);
     registerGoogleGeminiCliProvider(api);
   },
@@ -129,7 +131,7 @@ describe("google provider plugin hooks", () => {
     ).toBe("tagged");
   });
 
-  it("keeps google-antigravity hook aliases on tagged reasoning mode", async () => {
+  it("keeps google-antigravity on tagged reasoning mode", async () => {
     const { providers } = await registerProviderPlugin({
       plugin: googleProviderPlugin,
       id: "google",
